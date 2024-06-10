@@ -1,0 +1,30 @@
+version: '3.8'
+
+networks:
+  desmos:
+    name: desmos-network
+    driver: bridge
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: prometheus
+    ports:
+      - "9096:9090"
+    volumes:
+      - ../../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - desmos
+
+  grafana:
+    image: grafana/grafana:11.0.0
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ../../grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ../../grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ../../grafana/provisioning/dashboards/dashboard_files:/var/lib/grafana/dashboards
+    networks:
+      - desmos
