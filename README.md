@@ -6,13 +6,11 @@
 
 # Introduction
 
----
-
 This documentation details the integration and use of Prometheus and Grafana components to obtain application metrics. These tools allow you to effectively monitor application behaviors and performance in real time. Through this integration, you will be able to visualize important metrics, identify trends, and set alerts to maintain optimal performance. We will use Prometheus as a source of metrics data for Grafana to use and expose through panels that will form a dashboard.
 
-## Installation
-
 ---
+
+## Installation
 
 Once the necessary dependencies have been added, including Actuator and Micrometer, and the Actuator endpoints have been enabled in our configuration file, we can start with the implementation of these components. Actuator will allow us to expose various application management endpoints, while Micrometer will help us to collect and expose custom metrics of our application for further analysis and visualization. (For more details on these prerequisites you can visit this link [Monitoring Made Simple: Empowering Spring Boot Applications with Prometheus and Grafana](link)).
 
@@ -77,7 +75,7 @@ This configuration file defines how Grafana will manage and provide the dashboar
 
 ---
 
-Now we can test if our Prometheus metrics endpoint is enabled and working correctly. For this, we need to use the link containing the port of the application from which we want to request its metrics, for example, using `http://localhost:8080/actuator/prometheus` (the link format depends on what we have defined in our configuration file). We will see something like this:
+Now we can test if our Prometheus metrics endpoint is enabled and working correctly. For this, we need to use the link containing the port of the application from which we want to request its metrics, for example, using `http://localhost:8080/prometheus` (the link format depends on what we have defined in our configuration file, we skip the word '/actuator' from our path). We will see something like this:
 
 ![Screenshot of Prometheus metrics](docs/images/prometheus-metrics.png)
 
@@ -125,115 +123,68 @@ Below is the purpose of each panel on the "Desmos Metrics" dashboard, which is d
 
 ---
 
-#### Panel 1: Instance Status
-
-**Description:** Displays the status of the container, which can be "up" or "down".
-
-**Type:** Stat
-
-#### Panel 2: Uptime
-
-**Description:** Shows the time the application has been up since it was started.
-
-**Type:** Stat
-
-#### Panel 3: Start time
-
-**Description:** Displays the start date of the application in the format YYYY/MM/DD HH:mm.
-
-**Type:** Stat
-
-#### Panel 4: Heap Used
-
-**Description:** This panel shows the amount of heap memory used in the application.
-
-**Type:** Gauge
-
-#### Panel 5: Non-Heap Used
-
-**Description:** This panel shows the amount of non-heap memory used in the application.
-
-**Type:** Gauge
-
-#### Panel 6: Process open files
-
-**Description:** Displays the count of open files.
-
-**Type:** Time series
-
-#### Panel 7: CPU usage
-
-**Description:** Graph showing the CPU usage of the application.
-
-**Type:** Gauge
-
-#### Panel 8: Load average
-
-**Description:** The sum of the number of runnable entities queued to the available processors and the number of runnable entities that are running on the available processors averaged over a period of time.
-
-**Type:** Time series
+* Panel 1: Instance Status
+    * **Description:** Displays the status of the container, which can be "up" or "down".
+    * **Type:** Stat
+      
+* Panel 2: Uptime
+    * **Description:** Shows the time the application has been up since it was started.
+    * **Type:** Stat
+* Panel 3: Start time
+    * **Description:** Displays the start date of the application in the format YYYY/MM/DD HH:mm.
+    * **Type:** Stat
+* Panel 4: Heap Used
+    * **Description:** This panel shows the amount of heap memory used in the application.
+    * **Type:** Gauge
+* Panel 5: Non-Heap Used
+    * **Description:** This panel shows the amount of non-heap memory used in the application.
+    * **Type:** Gauge
+* Panel 6: Process open files
+    * **Description:** Displays the count of open files.
+    * **Type:** Time series
+* Panel 7: CPU usage
+    * **Description:** Graph showing the CPU usage of the application.
+    * **Type:** Gauge
+* Panel 8: Load average
+    * **Description:** The sum of the number of runnable entities queued to the available processors and the number of runnable entities that are running on the available processors averaged over a period of time.
+    * **Type:** Time series
 
 ### Row 2: HTTP Statics
 
 ---
 
-#### Panel 1: HTTP Server Requests Count Rate
-
-**Description:** This metric represents the rate of change of the count of HTTP requests over time.
-
-**Type:** Time series
-
-#### Panel 2: HTTP Server Requests Sum Rate
-
-**Description:** This metric represents the rate of change of the cumulative sum of the duration of HTTP requests over time.
-
-**Type:** Time series
-
-#### Panel 3: HTTP Codes
-
-**Description:** This metric represents the rate of change of the count of HTTP requests for all HTTP status codes over time.
-
-**Type:** Time series
-
-#### Panel 4: HTTP Server Requests Max
-
-**Description:** This metric represents the maximum recorded duration of HTTP requests for a specific instance and application.
-
-**Type:** Time series
+* Panel 1: HTTP Server Requests Count Rate
+    * **Description:** This metric represents the rate of change of the count of HTTP requests over time.
+    * **Type:** Time series
+* Panel 2: HTTP Server Requests Sum Rate
+    * **Description:** This metric represents the rate of change of the cumulative sum of the duration of HTTP requests over time.
+    * **Type:** Time series
+* Panel 3: HTTP Codes
+    * **Description:** This metric represents the rate of change of the count of HTTP requests for all HTTP status codes over time.
+    * **Type:** Time series
+* Panel 4: HTTP Server Requests Max
+    * **Description:** This metric represents the maximum recorded duration of HTTP requests for a specific instance and application.
+    * **Type:** Time series
 
 ### Row 3: Logs Statics
 
 ---
 
-#### Panel 1: Info logs
-
-**Description:** This metric represents the total number of events logged with the "info" log level in the logging system.
-
-**Type:** Time series
-
-#### Panel 2: Error logs
-
-**Description:** This metric represents the total number of events logged with the "error" log level in the logging system.
-
-**Type:** Time series
-
-#### Panel 3: Warn logs
-
-**Description:** This metric represents the total number of events logged with the "warn" log level in the logging system.
-
-**Type:** Time series
-
-#### Panel 4: Debug logs
-
-**Description:** This metric represents the total number of events logged with the "debug" log level in the logging system.
-
-**Type:** Time series
-
-#### Panel 5: Trace logs
-
-**Description:** This metric represents the total number of events logged with the "trace" log level in the logging system.
-
-**Type:** Time series
+* Panel 1: Info logs
+    * **Description:** This metric represents the total number of events logged with the "info" log level in the logging system.
+    * **Type:** Time series
+* Panel 2: Error logs
+    * **Description:** This metric represents the total number of events logged with the "error" log level in the logging system.
+    * **Type:** Time series
+* Panel 3: Warn logs
+    * **Description:** This metric represents the total number of events logged with the "warn" log level in the logging system.
+    * **Type:** Time series
+* Panel 4: Debug logs
+    * **Description:** This metric represents the total number of events logged with the "debug" log level in the logging system.
+    * **Type:** Time series
+* Panel 5: Trace logs
+    * **Description:** This metric represents the total number of events logged with the "trace" log level in the logging system.
+    * **Type:** Time series
 
 
 ## Additional Resources
